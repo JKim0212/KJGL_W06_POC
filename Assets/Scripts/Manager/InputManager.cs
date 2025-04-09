@@ -9,7 +9,7 @@ public class InputManager : MonoBehaviour
     public Action<GameObject> crewSelectAction;
     public Action CrewDeselectAction;
     public Action<GameObject> cellSelectAction;
-    public Action enemySlotSelectAction;
+    public Action<GameObject> enemySlotSelectAction;
     private void Awake()
     {
         if (Instance == null)
@@ -58,21 +58,25 @@ public class InputManager : MonoBehaviour
             {
                 cellSelectAction.Invoke(hit.collider.gameObject);
             }
+            else if (hit.collider.gameObject.CompareTag("EnemySlot"))
+            {
+                enemySlotSelectAction.Invoke(hit.collider.gameObject);
+            }
         }
         else
         {
             Debug.Log("No object was hit by the raycast.");
-            if(CrewManager.Instance.SelectedCrew != null)
+            if (CrewManager.Instance.SelectedCrew != null)
             {
                 CrewDeselectAction.Invoke();
             }
-            
+
         }
     }
 
     private void OnDestroy()
     {
-        if(_inputActions != null)
+        if (_inputActions != null)
         {
             _inputActions.Control.LeftClick.performed -= OnLeftClick;
             _inputActions.Control.LeftClick.performed -= OnRightClick;

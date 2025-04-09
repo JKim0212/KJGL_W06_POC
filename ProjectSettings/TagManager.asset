@@ -7,6 +7,7 @@ TagManager:
   - Crew
   - Room
   - Cell
+  - EnemySlot
   layers:
   - Default
   - TransparentFX
@@ -55,6 +56,9 @@ TagManager:
     locked: 0
   - name: Crew
     uniqueID: 390300239
+    locked: 0
+  - name: Gun
+    uniqueID: 875625275
     locked: 0
   m_RenderingLayers:
   - Default
