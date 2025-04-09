@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class WeaponRoom : RoomSystem, IRoomAction
 {
-    float damage = 10;
     Coroutine shootCo;
     bool canShoot = true;
     float coolDown = 5;
@@ -24,11 +23,11 @@ public class WeaponRoom : RoomSystem, IRoomAction
     }
     public void RoomAction()
     {
-        if(targetSlot != null && crewList.Count != 0)
+        if (targetSlot != null && crewList.Count != 0)
         {
             Vector2 diff = targetSlot.transform.position - _gun.transform.position;
             float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-            _gun.transform.rotation = Quaternion.Euler(0f,0f, angle);
+            _gun.transform.rotation = Quaternion.Euler(0f, 0f, angle);
             Shoot();
         }
     }

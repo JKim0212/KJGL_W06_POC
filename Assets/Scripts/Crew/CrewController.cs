@@ -23,6 +23,7 @@ public class CrewController : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Instance.crewCount++;
         highlight = transform.GetChild(0).gameObject;
         CurrentRoom = transform.parent.parent.GetComponent<RoomSystem>();
         _health = _maxHealth;
@@ -71,10 +72,17 @@ public class CrewController : MonoBehaviour
     public void Damage(float amount)
     {
         _health -= amount;
-        //if (_health <= 0)
-        //{
-        //    CurrentRoom.RemoveCrew(this);
-        //    Destroy(gameObject);
-        //}
+        if (_health <= 0)
+        {
+            CurrentRoom.RemoveCrew(this);
+            GameManager.Instance.crewCount--;
+            Destroy(gameObject);
+
+            if (GameManager.Instance.crewCount == 0)
+            {
+                Debug.Log("GameOver");
+                Time.timeScale = 0f;
+            }
+        }
     }
 }

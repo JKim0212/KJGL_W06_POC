@@ -12,6 +12,10 @@ public class EnemySlot : MonoBehaviour
 
     Coroutine shootCo;
 
+    private void Start()
+    {
+        GameManager.Instance.enemySlotCount++;
+    }
     private void Update()
     {
         if (canShoot)
@@ -20,7 +24,7 @@ public class EnemySlot : MonoBehaviour
             target = RoomManager.Instance.Cells[random];
             Vector2 diff = target.transform.position - transform.position;
             float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0,0,angle);
+            transform.rotation = Quaternion.Euler(0, 0, angle);
             canShoot = false;
             Shoot();
         }
@@ -43,6 +47,16 @@ public class EnemySlot : MonoBehaviour
     public void Damage(float damage)
     {
         health -= damage;
+        if (health <= 0)
+        {
+            GameManager.Instance.enemySlotCount--;
+            Destroy(gameObject);
+            if(GameManager.Instance.enemySlotCount == 0)
+            {
+                Debug.Log("GameClear");
+                Time.timeScale = 0f;
+            }
+        }
     }
 
 }
