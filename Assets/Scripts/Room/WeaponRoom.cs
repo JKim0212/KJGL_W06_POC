@@ -9,6 +9,9 @@ public class WeaponRoom : RoomSystem, IRoomAction
     float coolDown = 5;
 
     GameObject _gun;
+    GameObject _shootPos;
+
+    [SerializeField] GameObject _projectile;
 
     EnemySlot targetSlot;
     protected override void Init()
@@ -17,10 +20,11 @@ public class WeaponRoom : RoomSystem, IRoomAction
         RoomManager.Instance.AddRoom(this);
         InputManager.Instance.enemySlotSelectAction += TargetEnemy;
         _gun = FindAnyObjectByType<Gun>().gameObject;
+        _shootPos = _gun.transform.GetChild(0).GetChild(0).gameObject;
     }
     public void RoomAction()
     {
-        if(targetSlot != null)
+        if(targetSlot != null && crewList.Count != 0)
         {
             Vector2 diff = targetSlot.transform.position - _gun.transform.position;
             float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
@@ -37,7 +41,7 @@ public class WeaponRoom : RoomSystem, IRoomAction
 
     void Shoot()
     {
-        if (canShoot && crewList.Count != 0)
+        if (canShoot)
         {
             canShoot = false;
             float currentCooldown = coolDown * (1 - (0.125f * crewList.Count));
@@ -48,6 +52,7 @@ public class WeaponRoom : RoomSystem, IRoomAction
     IEnumerator ShootCoroutine(float currentCooldown)
     {
         Debug.Log("Shoot");
+        Instantiate(_projectile, _shootPos.transform.position, _gun.transform.rotation);
         yield return new WaitForSeconds(currentCooldown);
         canShoot = true;
     }
