@@ -2,8 +2,11 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
-  tags: []
+  serializedVersion: 3
+  tags:
+  - Crew
+  - Room
+  - Cell
   layers:
   - Default
   - TransparentFX
@@ -41,3 +44,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Ship
+    uniqueID: 180946135
+    locked: 0
+  - name: Cell
+    uniqueID: 3450720029
+    locked: 0
+  - name: Highlight
+    uniqueID: 1141166081
+    locked: 0
+  - name: Crew
+    uniqueID: 390300239
+    locked: 0
+  m_RenderingLayers:
+  - Default

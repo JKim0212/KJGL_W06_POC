@@ -1,51 +1,45 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CrewController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class CrewController : MonoBehaviour
 {
-    float health;
-    float moveSpeed;
-    [SerializeField] GameObject clone;
+    float _health;
+    [SerializeField] float _moveSpeed;
 
-    public static CrewController crewToMove = null;
-    public static GameObject draggedObject = null;
-
-    public Transform currentParent;
-    Transform previousParent;
+    public RoomSystem CurrentRoom { get; set; }
+    GameObject highlight;
+    Coroutine _moveCo;
 
     private void Start()
     {
-        currentParent = transform.parent;
+        highlight = transform.GetChild(0).gameObject;
+        CurrentRoom = transform.parent.parent.GetComponent<RoomSystem>();
     }
 
-    //선원을 클릭시 드래그 시작
-    public void OnBeginDrag(PointerEventData eventData)
+    public void ToggleSelect(bool select)
     {
-        currentParent.parent.GetComponent<RoomSystem>().RemoveCrew(this);
-        previousParent = currentParent;
-        draggedObject = Instantiate(clone, transform.position, Quaternion.identity); //선원의 옮기는 위치를 표시해줄 분신 소환
-        crewToMove = this;
+        highlight.SetActive(select);
     }
 
-    //드래그 중 분신의 위치 마우스 포인터 따라오기
-    public void OnDrag(PointerEventData eventData)
+    public void Move(Vector2 targetPos)
     {
-        Vector2 currentPos = Camera.main.ScreenToWorldPoint(eventData.position);
-        draggedObject.transform.position = currentPos;
-
-    }
-    //마우스 놓을 시 만약 방에 들어가지 않았다면 리셋
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        if (previousParent == currentParent) //원래 부모와 지금 부모가 같은지체크
+        if(_moveCo != null)
         {
-            Debug.Log("prev parent add");
-            previousParent = null;
-            currentParent.parent.GetComponent<RoomSystem>().AddCrew(this);
-            Destroy(draggedObject);
-            draggedObject = null;
-            crewToMove = null;
+            StopCoroutine(_moveCo);
         }
+        _moveCo = StartCoroutine(MoveCoroutine(targetPos));
+    }
 
+    IEnumerator MoveCoroutine(Vector2 targetPos)
+    {
+        Debug.Log("Moving");
+        while(Vector2.Distance(transform.position, targetPos) > 0.1f)
+        {
+            transform.position = Vector2.Lerp(transform.position, targetPos, Time.deltaTime * _moveSpeed);
+            yield return null;
+        }
+        transform.position = new Vector3 (targetPos.x, targetPos.y, -0.1f);
+        RoomManager.Instance.DeselectRoom();
     }
 }

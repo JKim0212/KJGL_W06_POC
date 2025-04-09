@@ -17,14 +17,10 @@ public class RoomSystem : MonoBehaviour
     public void AddCrew(CrewController crewToAdd)
     {
         crewList.Add(crewToAdd);
-        crewToAdd.transform.parent = transform.GetChild(crewList.Count - 1);
-        crewToAdd.transform.position = crewToAdd.transform.parent.position;
-        crewToAdd.currentParent = crewToAdd.transform.parent;
     }
 
     public void RemoveCrew(CrewController crewToRemove)
     {
         crewList.Remove(crewToRemove);
     }
-
 }
