@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class RoomSystem : MonoBehaviour
 {
-    List<CrewController> crewList = new List<CrewController>();
+    protected List<CrewController> crewList = new List<CrewController>();
 
     private void Start()
+    {
+        Init();
+    }
+
+    protected virtual void Init()
     {
         foreach (CrewController crew in GetComponentsInChildren<CrewController>())
         {

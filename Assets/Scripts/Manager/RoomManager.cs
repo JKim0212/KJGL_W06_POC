@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RoomManager : MonoBehaviour
@@ -5,6 +6,8 @@ public class RoomManager : MonoBehaviour
     public static RoomManager Instance { get; private set; }
     public RoomSystem SelectedRoom { get; private set; }
     GameObject roomHighlight;
+
+    List<IRoomAction> roomList = new List<IRoomAction>();
 
     private void Awake()
     {
@@ -19,6 +22,13 @@ public class RoomManager : MonoBehaviour
         roomHighlight = transform.GetChild(0).gameObject;
         InputManager.Instance.cellSelectAction += SelectRoom;
         SelectedRoom = null;
+    }
+
+    private void Update()
+    {
+        foreach (IRoomAction room in roomList) {
+            room.RoomAction();
+        }
     }
 
     void SelectRoom(GameObject cell)
@@ -47,4 +57,10 @@ public class RoomManager : MonoBehaviour
     {
         roomHighlight.SetActive(select);
     }
+
+    public void AddRoom(IRoomAction room)
+    {
+        roomList.Add(room);
+    }
+
 }

@@ -4,6 +4,7 @@ using UnityEngine.AI;
 
 public class CrewController : MonoBehaviour
 {
+    [SerializeField] float _maxHealth;
     float _health;
     [SerializeField] float _moveSpeed;
     NavMeshAgent _agent;
@@ -24,6 +25,7 @@ public class CrewController : MonoBehaviour
     {
         highlight = transform.GetChild(0).gameObject;
         CurrentRoom = transform.parent.parent.GetComponent<RoomSystem>();
+        //_health = _maxHealth;
     }
 
     public void ToggleSelect(bool select)
@@ -55,5 +57,14 @@ public class CrewController : MonoBehaviour
         transform.position = targetPos;
         transform.rotation = CurrentRoom.transform.rotation;
         RoomManager.Instance.DeselectRoom();
+    }
+
+    public void Heal(float amount)
+    {
+        _health += amount;
+        if(_health >= _maxHealth)
+        {
+            _health = _maxHealth;
+        }
     }
 }
