@@ -11,10 +11,12 @@ public class RoomManager : MonoBehaviour
     GameObject roomHighlight;
 
     List<IRoomAction> roomList = new List<IRoomAction>();
+    public List<Transform> Cells = new List<Transform>();
 
     [SerializeField] float _fireDamage = 5;
     [SerializeField] float _fireDamageTime = 1f;
-    
+    [SerializeField] GameObject fireEffect;
+    public GameObject FireEffect => fireEffect;
 
 
     private void Awake()

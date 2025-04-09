@@ -3,8 +3,9 @@ using UnityEngine;
 public class TrailerManager : MonoBehaviour
 {
     public static TrailerManager Instance { get; private set; }
-    float missChance = 10;
+    public float MissChance => missChance;
 
+    float missChance = 10;
     public float Damage { get; private set; } = 10;
     private void Awake()
     {
@@ -19,4 +20,3 @@ public class TrailerManager : MonoBehaviour
         this.missChance = missChance;
     }
 }
- 

@@ -7,9 +7,10 @@ public class RoomSystem : MonoBehaviour
     protected List<CrewController> crewList = new List<CrewController>();
     bool onFire = false;
     bool canTakeFireDamage = true;
-    Coroutine FireDamageCo;
-
+    Coroutine fireDamageCo;
     GameObject fireEffect;
+    float fireGage;
+
     private void Start()
     {
         Init();
@@ -25,9 +26,21 @@ public class RoomSystem : MonoBehaviour
 
     private void Update()
     {
-        if (onFire && canTakeFireDamage)
+        if (onFire)
         {
-
+            if (canTakeFireDamage)
+            {
+                canTakeFireDamage = false;
+                TakeFireDamage();
+            }
+            if (crewList.Count > 0)
+            {
+                fireGage -= Time.deltaTime * 10 * crewList.Count;
+                if(fireGage <= 0)
+                {
+                    ExtinguishFire();
+                }
+            }
         }
     }
 
@@ -46,7 +59,7 @@ public class RoomSystem : MonoBehaviour
     {
         TakeDamage(amount / 4);
         int poss = Random.Range(1, 101);
-        if(poss <= 25)
+        if(poss <= 25 && !onFire)
         {
             StartFire();
         }
@@ -62,7 +75,8 @@ public class RoomSystem : MonoBehaviour
     public void StartFire()
     {
         onFire = true;
-        fireEffect = Instantiate(fireEffect, transform.position, Quaternion.identity);
+        fireEffect = Instantiate(RoomManager.Instance.FireEffect, transform.position, Quaternion.identity);
+        fireGage = 100;
     }
 
     public void ExtinguishFire()
@@ -74,7 +88,7 @@ public class RoomSystem : MonoBehaviour
 
     public void TakeFireDamage()
     {
-        FireDamageCo = StartCoroutine(FireDamageCoroutine());
+        fireDamageCo = StartCoroutine(FireDamageCoroutine());
     }
 
     IEnumerator FireDamageCoroutine()

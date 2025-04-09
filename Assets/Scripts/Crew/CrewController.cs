@@ -25,7 +25,7 @@ public class CrewController : MonoBehaviour
     {
         highlight = transform.GetChild(0).gameObject;
         CurrentRoom = transform.parent.parent.GetComponent<RoomSystem>();
-        //_health = _maxHealth;
+        _health = _maxHealth;
     }
 
     public void ToggleSelect(bool select)
@@ -71,9 +71,10 @@ public class CrewController : MonoBehaviour
     public void Damage(float amount)
     {
         _health -= amount;
-        if (_health <= 0)
-        {
-            Destroy(gameObject);
-        }
+        //if (_health <= 0)
+        //{
+        //    CurrentRoom.RemoveCrew(this);
+        //    Destroy(gameObject);
+        //}
     }
 }

@@ -465,6 +465,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9e0885896f0904dba3dd502fd57cd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coolDown: 3
+  _projectile: {fileID: 4921680651087191301, guid: 3a100c0da2e361b4c83391907ef97d4a, type: 3}
 --- !u!1 &282969162
 GameObject:
   m_ObjectHideFlags: 0
@@ -2447,8 +2449,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9e75eea04f5d414ebd4e0dc61c8a91b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Cells: []
   _fireDamage: 5
   _fireDamageTime: 1
+  fireEffect: {fileID: 3477098427444310810, guid: ea250f8c741b35346a4386c70d21b9d0, type: 3}
 --- !u!114 &1593033335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3310,6 +3314,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9e0885896f0904dba3dd502fd57cd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coolDown: 0
+  _projectile: {fileID: 0}
 --- !u!58 &1759011425
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3358,6 +3364,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9e0885896f0904dba3dd502fd57cd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coolDown: 5
+  _projectile: {fileID: 4921680651087191301, guid: 3a100c0da2e361b4c83391907ef97d4a, type: 3}
 --- !u!1 &1908996696 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7226251843934073390, guid: 7e51fe5626ade0c4f8a707fbd10b90ab, type: 3}
@@ -3516,6 +3524,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9e0885896f0904dba3dd502fd57cd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coolDown: 7
+  _projectile: {fileID: 4921680651087191301, guid: 3a100c0da2e361b4c83391907ef97d4a, type: 3}
 --- !u!1001 &1989301154
 PrefabInstance:
   m_ObjectHideFlags: 0
