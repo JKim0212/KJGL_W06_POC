@@ -35,7 +35,7 @@ public class CrewController : MonoBehaviour
 
     public void Move(Vector2 targetPos)
     {
-        if(_moveCo != null)
+        if (_moveCo != null)
         {
             StopCoroutine(_moveCo);
         }
@@ -46,12 +46,12 @@ public class CrewController : MonoBehaviour
     {
         _agent.SetDestination(targetPos);
         Debug.Log("Moving");
-        while(Vector2.Distance(transform.position, targetPos) > 0.1f)
+        while (Vector2.Distance(transform.position, targetPos) > 0.1f)
         {
             Vector3 diff = _agent.nextPosition - transform.position;
             float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
             transform.position = _agent.nextPosition;
-            transform.rotation = Quaternion.Euler(0f,0f, angle);
+            transform.rotation = Quaternion.Euler(0f, 0f, angle);
             yield return null;
         }
         transform.position = targetPos;
@@ -62,9 +62,18 @@ public class CrewController : MonoBehaviour
     public void Heal(float amount)
     {
         _health += amount;
-        if(_health >= _maxHealth)
+        if (_health >= _maxHealth)
         {
             _health = _maxHealth;
+        }
+    }
+
+    public void Damage(float amount)
+    {
+        _health -= amount;
+        if (_health <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }

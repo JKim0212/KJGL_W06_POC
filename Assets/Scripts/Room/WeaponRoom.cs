@@ -52,7 +52,7 @@ public class WeaponRoom : RoomSystem, IRoomAction
     IEnumerator ShootCoroutine(float currentCooldown)
     {
         Debug.Log("Shoot");
-        Instantiate(_projectile, _shootPos.transform.position, _gun.transform.rotation);
+        Instantiate(_projectile, new Vector3(_shootPos.transform.position.x, _shootPos.transform.position.y, -0.1f), _gun.transform.rotation);
         yield return new WaitForSeconds(currentCooldown);
         canShoot = true;
     }

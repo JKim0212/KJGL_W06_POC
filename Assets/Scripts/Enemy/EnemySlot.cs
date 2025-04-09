@@ -2,15 +2,10 @@ using UnityEngine;
 
 public class EnemySlot : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    float health = 100;
 
-    // Update is called once per frame
-    void Update()
+    public void Damage(float damage)
     {
-        
+        health -= damage;
     }
 }

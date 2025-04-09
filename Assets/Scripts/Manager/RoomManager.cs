@@ -5,9 +5,17 @@ public class RoomManager : MonoBehaviour
 {
     public static RoomManager Instance { get; private set; }
     public RoomSystem SelectedRoom { get; private set; }
+    public float FireDamage => _fireDamage;
+    public float FireDamageTime => _fireDamageTime;
+
     GameObject roomHighlight;
 
     List<IRoomAction> roomList = new List<IRoomAction>();
+
+    [SerializeField] float _fireDamage = 5;
+    [SerializeField] float _fireDamageTime = 1f;
+    
+
 
     private void Awake()
     {

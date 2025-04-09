@@ -4,8 +4,8 @@ public class TrailerManager : MonoBehaviour
 {
     public static TrailerManager Instance { get; private set; }
     float missChance = 10;
-    float trailerHealth;
 
+    public float Damage { get; private set; } = 10;
     private void Awake()
     {
         if (Instance == null)
@@ -19,3 +19,4 @@ public class TrailerManager : MonoBehaviour
         this.missChance = missChance;
     }
 }
+ 

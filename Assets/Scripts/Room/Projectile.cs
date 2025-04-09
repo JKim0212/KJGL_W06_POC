@@ -1,16 +1,28 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] float damage;
+    float speed = 5;
+
+    private void Update()
     {
-        
+        transform.position = transform.position + transform.right * Time.deltaTime * speed;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnBecameInvisible()
     {
-        
+        Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Collided");
+        if (collision.gameObject.CompareTag("EnemySlot"))
+        {
+            collision.GetComponent<EnemySlot>().Damage(damage);
+            Destroy(gameObject) ;
+        }
     }
 }
