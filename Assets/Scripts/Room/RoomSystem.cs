@@ -5,7 +5,7 @@ using UnityEngine;
 public class RoomSystem : MonoBehaviour
 {
     protected List<CrewController> crewList = new List<CrewController>();
-    bool onFire = false;
+    protected bool onFire = false;
     bool canTakeFireDamage = true;
     Coroutine fireDamageCo;
     GameObject fireEffect;

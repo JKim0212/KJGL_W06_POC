@@ -4,6 +4,9 @@ using UnityEngine.AI;
 
 public class CrewController : MonoBehaviour
 {
+    CrewSO crewInfo;
+    [SerializeField] string crewName;
+
     [SerializeField] float _maxHealth;
     float _health;
     [SerializeField] float _moveSpeed;
@@ -27,11 +30,13 @@ public class CrewController : MonoBehaviour
         highlight = transform.GetChild(0).gameObject;
         CurrentRoom = transform.parent.parent.GetComponent<RoomSystem>();
         _health = _maxHealth;
+        crewInfo = Resources.Load<CrewSO>($"{crewName}");
     }
 
     public void ToggleSelect(bool select)
     {
         highlight.SetActive(select);
+        UIManager.Instance.ToggleCrewInfoCanvas(select, crewInfo);
     }
 
     public void Move(Vector2 targetPos)

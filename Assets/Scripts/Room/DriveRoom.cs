@@ -11,6 +11,13 @@ public class DriveRoom : RoomSystem, IRoomAction
     }
     public void RoomAction()
     {
-        TrailerManager.Instance.SetMissChance(missChance + missModifier * crewList.Count);
+        if (!onFire)
+        {
+            TrailerManager.Instance.SetMissChance(missChance + missModifier * crewList.Count);
+        } else
+        {
+            TrailerManager.Instance.SetMissChance(missChance);
+        }
+        
     }
 }

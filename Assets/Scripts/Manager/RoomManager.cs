@@ -36,7 +36,8 @@ public class RoomManager : MonoBehaviour
 
     private void Update()
     {
-        foreach (IRoomAction room in roomList) {
+        foreach (IRoomAction room in roomList)
+        {
             room.RoomAction();
         }
     }

@@ -15,7 +15,7 @@ public class HealingRoom : RoomSystem, IRoomAction
 
     public void RoomAction()
     {
-        if (canHeal && crewList.Count != 0)
+        if (canHeal && crewList.Count != 0 && !onFire)
         {
             canHeal = false;
             HealCrews();

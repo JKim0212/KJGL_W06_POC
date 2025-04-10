@@ -23,7 +23,7 @@ public class WeaponRoom : RoomSystem, IRoomAction
     }
     public void RoomAction()
     {
-        if (targetSlot != null && crewList.Count != 0)
+        if (targetSlot != null && crewList.Count != 0 && !onFire)
         {
             Vector2 diff = targetSlot.transform.position - _gun.transform.position;
             float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
